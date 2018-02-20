@@ -25,6 +25,10 @@
 - Add Google service account key with filename `bucket-writer.service-account.json` to `.gcloud/keys`
 - `yarn run deploy`
 
+## Deploying Test Prebid Configs
+- E.g. `file="test/configs/celebhour.js" destination="prebid-config-celebhour.js" node deploy.js`
+- Deploys to static.37x.com Google Cloud Storage bucket
+
 ---
 
 [![Build Status](https://travis-ci.org/prebid/Prebid.js.svg?branch=master)](https://travis-ci.org/prebid/Prebid.js)
