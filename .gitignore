@@ -2,8 +2,11 @@
 node_modules/
 build
 
+# 37x
+.gcloud/keys/*.json
+
 # Test Files
-test/app
+#test/app
 gpt.html
 gpt-each-bidder3.html
 

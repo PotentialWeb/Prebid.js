@@ -1,0 +1,429 @@
+<html>
+
+<head>
+  <title>Prebid.js integration example</title>
+  <script>
+    var PREBID_TIMEOUT = 700;
+
+    var adUnits = [{
+      name: "/61424206/90sKidsOnly_BTF_MPU2",
+      code: "/61424206/90sKidsOnly_BTF_MPU2",
+      div: "div-gpt-ad-1487764907032-4",
+      sizes: [
+        [300, 250]
+      ],
+      bids: [{
+        bidder: "pubmatic",
+        params: {
+          publisherId: "120658",
+          adSlot: "90sKidsOnly_BTF_MPU2@300x250"
+        }
+      }, {
+        bidder: "openx",
+        params: {
+          jstag_url: "",
+          unit: "538807798",
+          pgid: "",
+          delDomain: "potential-d.openx.net",
+          customParams: ""
+        }
+      }, {
+        bidder: "appnexusAst",
+        params: {
+          placementId: 11230950
+        }
+      }, {
+        bidder: "rubicon",
+        params: {
+          rp_account: "",
+          rp_site: "",
+          rp_zonesize: "",
+          accountId: "15848",
+          siteId: "130746",
+          zoneId: "726048",
+          sizes: "",
+          keywords: "",
+          inventory: "",
+          visitor: "",
+          position: "",
+          userId: ""
+        }
+      }, {
+        bidder: "sovrn",
+        params: {
+          tagid: "458177",
+          sizes: ""
+        }
+      }],
+      serverBids: [],
+      enabled: !0,
+      clientEnabled: !0,
+      serverEnabled: !0,
+      holisticResequencer: !1,
+      hardFloor: 0
+    }, {
+      name: "/61424206/90sKidsOnly_BTF_MPU1",
+      code: "/61424206/90sKidsOnly_BTF_MPU1",
+      div: "div-gpt-ad-1487764907032-3",
+      sizes: [
+        [300, 250]
+      ],
+      bids: [{
+        bidder: "openx",
+        params: {
+          jstag_url: "",
+          unit: "538807796",
+          pgid: "",
+          delDomain: "potential-d.openx.net",
+          customParams: ""
+        }
+      }, {
+        bidder: "pubmatic",
+        params: {
+          publisherId: "120658",
+          adSlot: "90sKidsOnly_BTF_MPU1@300x250"
+        }
+      }, {
+        bidder: "appnexusAst",
+        params: {
+          placementId: 11230948
+        }
+      }, {
+        bidder: "rubicon",
+        params: {
+          rp_account: "",
+          rp_site: "",
+          rp_zonesize: "",
+          accountId: "15848",
+          siteId: "130746",
+          zoneId: "726050",
+          sizes: "",
+          keywords: "",
+          inventory: "",
+          visitor: "",
+          position: "",
+          userId: ""
+        }
+      }, {
+        bidder: "sovrn",
+        params: {
+          tagid: "458176",
+          sizes: ""
+        }
+      }],
+      serverBids: [],
+      enabled: !0,
+      clientEnabled: !0,
+      serverEnabled: !0,
+      holisticResequencer: !1,
+      hardFloor: 0
+    }, {
+      name: "/61424206/90sKidsOnly_ATF_MPU1",
+      code: "/61424206/90sKidsOnly_ATF_MPU1",
+      div: "div-gpt-ad-1487764907032-1",
+      sizes: [
+        [300, 600],
+        [300, 250]
+      ],
+      bids: [{
+        bidder: "openx",
+        params: {
+          jstag_url: "",
+          unit: "538807793",
+          pgid: "",
+          delDomain: "potential-d.openx.net",
+          customParams: ""
+        }
+      }, {
+        bidder: "appnexusAst",
+        params: {
+          placementId: 11230941
+        }
+      }, {
+        bidder: "pubmatic",
+        params: {
+          publisherId: "120658",
+          adSlot: "90sKidsOnly_ATF_MPU1@300x600"
+        }
+      }, {
+        bidder: "rubicon",
+        params: {
+          rp_account: "",
+          rp_site: "",
+          rp_zonesize: "",
+          accountId: "15848",
+          siteId: "130746",
+          zoneId: "726052",
+          sizes: "",
+          keywords: "",
+          inventory: "",
+          visitor: "",
+          position: "",
+          userId: ""
+        }
+      }, {
+        bidder: "sovrn",
+        params: {
+          tagid: "458173",
+          sizes: ""
+        }
+      }],
+      serverBids: [],
+      enabled: !0,
+      clientEnabled: !0,
+      serverEnabled: !0,
+      holisticResequencer: !1,
+      hardFloor: 0
+    }, {
+      name: "/61424206/90sKidsOnly_ATF_MPU2",
+      code: "/61424206/90sKidsOnly_ATF_MPU2",
+      div: "div-gpt-ad-1487764907032-2",
+      sizes: [
+        [300, 250],
+        [300, 600]
+      ],
+      bids: [{
+        bidder: "pubmatic",
+        params: {
+          publisherId: "120658",
+          adSlot: "90sKidsOnly_ATF_MPU2@300x600"
+        }
+      }, {
+        bidder: "openx",
+        params: {
+          jstag_url: "",
+          unit: "538807795",
+          pgid: "",
+          delDomain: "potential-d.openx.net",
+          customParams: ""
+        }
+      }, {
+        bidder: "sovrn",
+        params: {
+          tagid: "458175",
+          sizes: ""
+        }
+      }, {
+        bidder: "appnexusAst",
+        params: {
+          placementId: 11230947
+        }
+      }, {
+        bidder: "rubicon",
+        params: {
+          rp_account: "",
+          rp_site: "",
+          rp_zonesize: "",
+          accountId: "15848",
+          siteId: "130746",
+          zoneId: "726054",
+          sizes: "",
+          keywords: "",
+          inventory: "",
+          visitor: "",
+          position: "",
+          userId: ""
+        }
+      }],
+      serverBids: [],
+      enabled: !0,
+      clientEnabled: !0,
+      serverEnabled: !0,
+      holisticResequencer: !1,
+      hardFloor: 0
+    }, {
+      name: "/61424206/90sKidsOnly_BTF_BU",
+      code: "/61424206/90sKidsOnly_BTF_BU",
+      div: "div-gpt-ad-1487764907032-5",
+      sizes: [
+        [300, 250]
+      ],
+      bids: [{
+        bidder: "pubmatic",
+        params: {
+          publisherId: "120658",
+          adSlot: "90sKidsOnly_BTF_BU@300x250"
+        }
+      }, {
+        bidder: "openx",
+        params: {
+          jstag_url: "",
+          unit: "538807799",
+          pgid: "",
+          delDomain: "potential-d.openx.net",
+          customParams: ""
+        }
+      }, {
+        bidder: "sovrn",
+        params: {
+          tagid: "458178",
+          sizes: ""
+        }
+      }, {
+        bidder: "appnexusAst",
+        params: {
+          placementId: 11230952
+        }
+      }, {
+        bidder: "rubicon",
+        params: {
+          rp_account: "",
+          rp_site: "",
+          rp_zonesize: "",
+          accountId: "15848",
+          siteId: "130746",
+          zoneId: "726058",
+          sizes: "",
+          keywords: "",
+          inventory: "",
+          visitor: "",
+          position: "",
+          userId: ""
+        }
+      }],
+      serverBids: [],
+      enabled: !0,
+      clientEnabled: !0,
+      serverEnabled: !0,
+      holisticResequencer: !1,
+      hardFloor: 0
+    }];
+
+    var pbjs = pbjs || {};
+    pbjs.que = pbjs.que || [];
+  </script>
+
+  <script>
+    (function() {
+      var d = document,
+        pbs = d.createElement('script');
+      pbs.type = 'text/javascript';
+      pbs.src = '../../build/dev/prebid.js';
+      var target = document.getElementsByTagName('head')[0];
+      target.insertBefore(pbs, target.firstChild);
+    })();
+
+    var googletag = googletag || {};
+    googletag.cmd = googletag.cmd || [];
+    googletag.cmd.push(function() {
+      googletag.pubads().disableInitialLoad();
+    });
+
+    pbjs.que.push(function() {
+      pbjs.setConfig({ debug: true });
+      pbjs.addAdUnits(adUnits);
+      pbjs.requestBids({
+        bidsBackHandler: sendAdserverRequest
+      });
+    });
+
+    function sendAdserverRequest() {
+      if (pbjs.adserverRequestSent) return;
+      pbjs.adserverRequestSent = true;
+      googletag.cmd.push(function() {
+        pbjs.que.push(function() {
+          pbjs.setTargetingForGPTAsync();
+          googletag.pubads().refresh();
+        });
+      });
+    }
+
+    setTimeout(function() {
+      sendAdserverRequest();
+    }, PREBID_TIMEOUT);
+  </script>
+
+  <script>
+    (function() {
+      var gads = document.createElement('script');
+      gads.async = true;
+      gads.type = 'text/javascript';
+      var useSSL = 'https:' == document.location.protocol;
+      gads.src = (useSSL ? 'https:' : 'http:') +
+        '//www.googletagservices.com/tag/js/gpt.js';
+      var node = document.getElementsByTagName('script')[0];
+      node.parentNode.insertBefore(gads, node);
+    })();
+  </script>
+
+  <script>
+    googletag.cmd.push(function() {
+      googletag.defineSlot('/61424206/90sKidsOnly_ATF_MPU1', [
+        [300, 250],
+        [300, 600]
+      ], 'div-gpt-ad-1487764907032-1').addService(googletag.pubads());
+      googletag.defineSlot('/61424206/90sKidsOnly_ATF_MPU2', [
+        [300, 250],
+        [300, 600]
+      ], 'div-gpt-ad-1487764907032-2').addService(googletag.pubads());
+      googletag.defineSlot('/61424206/90sKidsOnly_BTF_MPU1', [300, 250], 'div-gpt-ad-1487764907032-3').addService(googletag.pubads());
+      googletag.defineSlot('/61424206/90sKidsOnly_BTF_MPU2', [300, 250], 'div-gpt-ad-1487764907032-4').addService(googletag.pubads());
+      googletag.defineSlot('/61424206/90sKidsOnly_BTF_BU', [300, 250], 'div-gpt-ad-1487764907032-5').addService(googletag.pubads());
+      googletag.pubads().enableSingleRequest();
+      googletag.enableServices();
+    });
+  </script>
+</head>
+
+<body>
+  <h2>Prebid.js Test</h2>
+
+  <a href="./page-1.html"/>Go to Page 1</a>
+
+  <div id='div-gpt-ad-1487764907032-1'>
+    <script type='text/javascript'>
+      googletag.cmd.push(function() {
+        googletag.display('div-gpt-ad-1487764907032-1');
+      });
+    </script>
+  </div>
+
+
+  <div id='div-gpt-ad-1487764907032-2'>
+    <script type='text/javascript'>
+      googletag.cmd.push(function() {
+        googletag.display('div-gpt-ad-1487764907032-2');
+      });
+    </script>
+  </div>
+
+  <div id='div-gpt-ad-1487764907032-3'>
+    <script type='text/javascript'>
+      googletag.cmd.push(function() {
+        googletag.display('div-gpt-ad-1487764907032-3');
+      });
+    </script>
+  </div>
+
+  <div id='div-gpt-ad-1487764907032-4'>
+    <script type='text/javascript'>
+      googletag.cmd.push(function() {
+        googletag.display('div-gpt-ad-1487764907032-4');
+      });
+    </script>
+  </div>
+
+  <div id='div-gpt-ad-1487764907032-5'>
+    <script type='text/javascript'>
+      googletag.cmd.push(function() {
+        googletag.display('div-gpt-ad-1487764907032-5');
+      });
+    </script>
+  </div>
+
+  <script type="text/javascript">
+    //Send data from prebid.js automatically
+    pbjs.que.push(function() {
+      pbjs.enableAnalytics({
+        provider: '37x',
+        options: {
+          organizationId: 'rpovbpJ5suZ',
+          siteId: 'fJkgD9zG5ep'
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+{
+  "advertiserId": 40880646,
+  "campaignId": 375745446,
+  "creativeId": 102760362246,
+  "isBackfill": false,
+  "isEmpty": false,
+  "labelIds": null,
+  "lineItemId": 123,
+  "serviceName": "publisher_ads",
+  "size": [
+    300,
+    600
+  ],
+  "slot": {
+    "Ra": "/61424206/90sKidsOnly_ATF_MPU1"
+  },
+  "slotContentChanged": true,
+  "sourceAgnosticCreativeId": 102760362246,
+  "sourceAgnosticLineItemId": 172970406
+}

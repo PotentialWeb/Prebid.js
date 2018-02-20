@@ -1,3 +1,32 @@
+# 37x Prebid.js
+
+> Quick notes regarding 37x's specific Prebid.js build
+
+## Development
+- **Do NOT** modify the 37xAnalyticsAdapter or tests in `master` branch
+- `git checkout 37x-analytics-adapter` to switch to the correct development branch
+- Pull requests to Prebid.js should always be from `37x-analytics-adapter` branch
+
+## Run adapter tests
+- `gulp test --file "test/spec/modules/37xAnalyticsAdapter_spec.js"`
+
+## Merge adapter changes into master
+- `git checkout master`
+- `git merge 37x-analytics-adapter`
+
+## Pull Prebid.js master
+- `git checkout 37x-analytics-adapter`
+- `git remote add upstream https://github.com/prebid/Prebid.js.git`
+- `git fetch upstream`
+- `git merge upstream/master`
+
+## Deployment
+- `git checkout master`
+- Add Google service account key with filename `bucket-writer.service-account.json` to `.gcloud/keys`
+- `yarn run deploy`
+
+---
+
 [![Build Status](https://travis-ci.org/prebid/Prebid.js.svg?branch=master)](https://travis-ci.org/prebid/Prebid.js)
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/prebid/Prebid.js.svg)](http://isitmaintained.com/project/prebid/Prebid.js "Percentage of issues still open")
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/prebid/Prebid.js.svg)](http://isitmaintained.com/project/prebid/Prebid.js "Average time to resolve an issue")
@@ -6,8 +35,6 @@
 [![devDependencies Status](https://david-dm.org/prebid/Prebid.js/dev-status.svg)](https://david-dm.org/prebid/Prebid.js?type=dev)
 
 # Prebid.js
-
-> A free and open source library for publishers to quickly implement header bidding.
 
 This README is for developers who want to contribute to Prebid.js.
 Additional documentation can be found at [the Prebid homepage](http://prebid.org).
@@ -68,11 +95,11 @@ For more info about yarn see https://yarnpkg.com
 - Then run the build:
 
         $ gulp build --modules=openxBidAdapter,rubiconBidAdapter,sovrnBidAdapter
-        
+
 Alternatively, a `.json` file can be specified that contains a list of modules you would like to include.
 
     $ gulp build --modules=modules.json
-        
+
 With `modules.json` containing the following
 ```json modules.json
 [

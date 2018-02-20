@@ -1,0 +1,40 @@
+[
+  {
+    "bidderCode": "rubicon",
+    "width": 300,
+    "height": 250,
+    "statusMessage": "Bid available",
+    "adId": "11eaf5c0f2a7b0c",
+    "source": "client",
+    "currency": "USD",
+    "creativeId": "3173401",
+    "cpm": 31.56781,
+    "ttl": 300,
+    "netRevenue": false,
+    "ad": "<html></html>",
+    "rubiconTargeting": {
+      "rpfl_elemid": "/61424206/90sKidsOnly_ATF_MPU2"
+    },
+    "auctionId": "d2c65d4b-c4fc-41b3-93d2-c67fb14a6ba1",
+    "responseTimestamp": 1517991064466,
+    "requestTimestamp": 1517991064205,
+    "bidder": "rubicon",
+    "adUnitCode": "/61424206/90sKidsOnly_ATF_MPU2",
+    "timeToRespond": 261,
+    "pbLg": "5.00",
+    "pbMg": "20.00",
+    "pbHg": "20.00",
+    "pbAg": "20.00",
+    "pbDg": "20.00",
+    "pbCg": "",
+    "size": "300x250",
+    "adserverTargeting": {
+      "hb_bidder": "rubicon",
+      "hb_adid": "11eaf5c0f2a7b0c",
+      "hb_pb": "20.00",
+      "hb_size": "300x250",
+      "hb_source": "client"
+    },
+    "status": "targetingSet"
+  }
+]
