@@ -4,7 +4,7 @@ const projectId = 'thirtysevenx-production';
 const bucketName = 'static.37x.com';
 const keyFilename = './.gcloud/keys/bucket-writer.service-account.json';
 
-const filename = process.env.file ? `./${process.env.file}` : './build/dist/prebid.js';
+const filename = process.env.file;
 const destination = process.env.destination ? process.env.destination : filename;
 const predefinedAcl = 'publicRead';
 

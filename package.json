@@ -5,7 +5,7 @@
   "main": "src/prebid.js",
   "scripts": {
     "build": "gulp build",
-    "deploy": "yarn run build && node deploy.js",
+    "deploy": "yarn run build && file='build/dist/prebid.js' destination='prebid.js' node deploy.js",
     "test": "gulp run-tests",
     "lint": "gulp lint"
   },
