@@ -6,6 +6,7 @@ const keyFilename = './.gcloud/keys/bucket-writer.service-account.json';
 
 const filename = process.env.file ? `./${process.env.file}` : './build/dist/prebid.js';
 const destination = process.env.destination ? process.env.destination : filename;
+const predefinedAcl = 'publicRead';
 
 const storage = new Storage({
   projectId, keyFilename
@@ -13,8 +14,8 @@ const storage = new Storage({
 
 storage
   .bucket(bucketName)
-  .upload(filename, { destination })
-  .then((results) => {
+  .upload(filename, { destination, predefinedAcl })
+  .then(() => {
     console.log(`${filename} uploaded to ${bucketName}.`);
   })
   .catch((err) => {
