@@ -1,7 +1,9 @@
 /* eslint-disable quotes,no-floating-decimal,padded-blocks */
 (function() {
+
   var PREBID_TIMEOUT = 1900;
   var BIDDR_HARD_FLOOR = 0;
+  var PREBID_DEBUG = true;
   var THIRTYSEVENXCONFIG = {
     organizationId: 'tclJobp26NX',
     siteId: 'hJrApexiAfd'
@@ -9,8 +11,8 @@
 
   /* Load prebid */
 
-  var pbjs = pbjs || {};
-  pbjs.que = pbjs.que || [];
+  window.pbjs = window.pbjs || {};
+  window.pbjs.que = window.pbjs.que || [];
 
   /* Define adUnits */
 
@@ -83,13 +85,7 @@
       params: {
         placementId: "12021417"
       }
-    }],
-    serverBids: [],
-    enabled: !0,
-    clientEnabled: !0,
-    serverEnabled: !0,
-    holisticResequencer: !1,
-    hardFloor: 0
+    }]
   }, {
     name: "/61424206/CelebHour_BTF_MPU2",
     code: "/61424206/CelebHour_BTF_MPU2",
@@ -159,13 +155,7 @@
       params: {
         placementId: "12021418"
       }
-    }],
-    serverBids: [],
-    enabled: !0,
-    clientEnabled: !0,
-    serverEnabled: !0,
-    holisticResequencer: !1,
-    hardFloor: 0
+    }]
   }, {
     name: "/61424206/CelebHour_ATF_BB",
     code: "/61424206/CelebHour_ATF_BB",
@@ -235,13 +225,7 @@
       params: {
         placementId: "12055436"
       }
-    }],
-    serverBids: [],
-    enabled: !0,
-    clientEnabled: !0,
-    serverEnabled: !0,
-    holisticResequencer: !1,
-    hardFloor: 0
+    }]
   }, {
     name: "/61424206/CelebHour_ATF_MPU2",
     code: "/61424206/CelebHour_ATF_MPU2",
@@ -312,13 +296,7 @@
       params: {
         placementId: "12021416"
       }
-    }],
-    serverBids: [],
-    enabled: !0,
-    clientEnabled: !0,
-    serverEnabled: !0,
-    holisticResequencer: !1,
-    hardFloor: 0
+    }]
   }, {
     name: "/61424206/CelebHour_ATF_MPU1",
     code: "/61424206/CelebHour_ATF_MPU1",
@@ -389,13 +367,7 @@
       params: {
         placementId: "12021415"
       }
-    }],
-    serverBids: [],
-    enabled: !0,
-    clientEnabled: !0,
-    serverEnabled: !0,
-    holisticResequencer: !1,
-    hardFloor: 0
+    }]
   }, {
     name: "/61424206/CelebHour_BTF_BU",
     code: "/61424206/CelebHour_BTF_BU",
@@ -468,21 +440,22 @@
     }]
   }];
 
-  pbjs.que.push(function() {
+  window.pbjs.que.push(function() {
 
     /* Set Prebid config */
 
-    pbjs.setConfig({
-      enableSendAllBids: true
+    window.pbjs.setConfig({
+      enableSendAllBids: true,
+      debug: PREBID_DEBUG
     });
 
     /* Add adUnits to prebid */
 
-    pbjs.addAdUnits(adUnits);
+    window.pbjs.addAdUnits(adUnits);
 
     /* Set Prebid bidderSettings */
 
-    pbjs.bidderSettings = {
+    window.pbjs.bidderSettings = {
       rubicon: {
         bidCpmAdjustment: function(e) {
           return .8 * e
@@ -549,15 +522,15 @@
 
     /* Request bids */
 
-    pbjs.requestBids({
+    window.pbjs.requestBids({
       bidsBackHandler: sendAdserverRequest
     });
   });
 
   /* Enable 37x Analytics adapter */
 
-  pbjs.que.push(function() {
-    pbjs.enableAnalytics({
+  window.pbjs.que.push(function() {
+    window.pbjs.enableAnalytics({
       provider: '37x',
       options: THIRTYSEVENXCONFIG
     });
@@ -565,19 +538,19 @@
 
   /* Disable googletag initial load */
 
-  var googletag = googletag || {};
-  googletag.cmd = googletag.cmd || [];
-  googletag.cmd.push(function() {
-    googletag.pubads().disableInitialLoad();
+  window.googletag = window.googletag || {};
+  window.googletag.cmd = window.googletag.cmd || [];
+  window.googletag.cmd.push(function() {
+    window.googletag.pubads().disableInitialLoad();
   });
 
   function sendAdserverRequest() {
-    if (pbjs.adserverRequestSent) return;
-    pbjs.adserverRequestSent = true;
-    googletag.cmd.push(function() {
-      pbjs.que.push(function() {
-        pbjs.setTargetingForGPTAsync();
-        googletag.pubads().refresh();
+    if (window.pbjs.adserverRequestSent) return;
+    window.pbjs.adserverRequestSent = true;
+    window.googletag.cmd.push(function() {
+      window.pbjs.que.push(function() {
+        window.pbjs.setTargetingForGPTAsync();
+        window.googletag.pubads().refresh();
       });
     });
   }
