@@ -123,7 +123,7 @@ export default class ThirtySevenXAdapter {
             utils.logInfo(`Could not get adUnitCode from adserver '${adserver}' render event response.`);
           }
           this.incrementSessionImpressions(this.session);
-          this.sendData();
+          this.willSendData();
         } catch (err) {
           utils.logInfo(err.message);
         }
@@ -143,7 +143,7 @@ export default class ThirtySevenXAdapter {
           }
           this.setAuctionEventStatus(auctionEvent, CONSTANTS.AUCTION_EVENT_STATUS.PREBID_RENDERED);
           this.creditSessionRevenue(this.session, auctionEvent.revenue, 'prebidRevenue');
-          this.sendData();
+          this.willSendData();
         } catch (err) {
           utils.logInfo(err.message);
         }
@@ -264,6 +264,8 @@ export default class ThirtySevenXAdapter {
         if (utils.isStr(source)) { return source; }
         referrer = utils.isStr(referrer) ? referrer : document.referrer;
         source = getURLSegment(referrer, 'host');
+        source = source.split(':')[0]; // Double check port is stripped
+        source = source.replace('www.', ''); // Double check www. is stripped
         return source.length > 0 ? source : 'organic';
       },
 
@@ -291,7 +293,9 @@ export default class ThirtySevenXAdapter {
        */
 
       incrementSessionPageviews(session) {
-        if (session.currentPath === this.getCurrentPath()) { return; }
+        let currentPath = this.getCurrentPath();
+        if (session.currentPath === currentPath) { return; }
+        session.currentPath = currentPath;
         session.pageviews += 1;
       },
 
@@ -358,7 +362,7 @@ export default class ThirtySevenXAdapter {
       getAdUnitCodeFromAdserverResponse(adserver, args) {
         switch (adserver) {
           case 'dfp':
-            return args && args.slot && args.slot.Ra ? args.slot.Ra : undefined;
+            return args && args.slot && typeof args.slot.getAdUnitPath === 'function' ? args.slot.getAdUnitPath() : undefined;
         }
       },
 
@@ -411,23 +415,31 @@ export default class ThirtySevenXAdapter {
       },
 
       /**
+       * @func willSendData
+       * @desc Takes a request to send data from a sibling function and debounces
+       * the actual sending of data.
+       */
+
+      willSendData() {
+        if (this.debouncer) { clearTimeout(this.debouncer); }
+        this.debouncer = setTimeout(this.sendData.bind(this), requestDebounce)
+      },
+
+      /**
        * @func sendData
        * @desc Handles the sending of data to the 37x collector microservice
        */
 
       sendData() {
-        if (this.debouncer) { clearTimeout(this.debouncer); }
-        this.debouncer = setTimeout(() => {
-          let session = this.session;
-          // Calculate the adserver revenue ratio
-          this.calculateAdserverRevenueRatio(session);
-          // Increment pageview
-          this.incrementSessionPageviews(session);
-          // Save the session data to sessionStorage
-          setSessionStorageObject(this.sessionKey, session);
-          // Send data to collector
-          this.makeRequest(session);
-        }, requestDebounce);
+        let session = this.session;
+        // Calculate the adserver revenue ratio
+        this.calculateAdserverRevenueRatio(session);
+        // Increment pageview
+        this.incrementSessionPageviews(session);
+        // Save the session data to sessionStorage
+        setSessionStorageObject(this.sessionKey, session);
+        // Send data to collector
+        this.makeRequest(session);
       },
 
       /**
@@ -438,7 +450,7 @@ export default class ThirtySevenXAdapter {
       makeRequest(session) {
         try {
           if (this.config.environment === 'test') {
-            this.willSendData = true;
+            this.canSendData = true;
             return;
           }
           ajax(url, res => this.afterRequest(res), JSON.stringify(session), { contentType: 'application/json' });

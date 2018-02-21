@@ -185,7 +185,9 @@ describe('37xAnalyticsAdapter', () => {
         eventType: CONSTANTS.EVENTS.ADSERVER_RENDER,
         args: {
           adserver: 'dfp',
-          slot: { Ra: '1' }
+          slot: {
+            getAdUnitPath() { return '1'; }
+          }
         }
       });
 
@@ -193,7 +195,9 @@ describe('37xAnalyticsAdapter', () => {
         eventType: CONSTANTS.EVENTS.ADSERVER_RENDER,
         args: {
           adserver: 'dfp',
-          slot: { Ra: '2' }
+          slot: {
+            getAdUnitPath() { return '2'; }
+          }
         }
       });
 
@@ -214,7 +218,7 @@ describe('37xAnalyticsAdapter', () => {
 
       setTimeout(() => {
         expect(adapter.session.adserverRevenueRatio).to.equal(0.5);
-        expect(adapter.willSendData).to.equal(true);
+        expect(adapter.canSendData).to.equal(true);
 
         let storedSession = getSessionStorageObject(CONSTANTS.SESSION_KEY);
 
