@@ -117,7 +117,7 @@ export default class ThirtySevenXAdapter {
             if (auctionEvent) {
               this.setAuctionEventStatus(auctionEvent, CONSTANTS.AUCTION_EVENT_STATUS.RENDERED);
             } else {
-              utils.logInfo(`Adserver '${adserver}' rendered adUnit '${adUnitCode}' without a Prebid bid.`);
+              utils.logInfo(`Adserver '${adserver}' rendered adUnit '${adUnitCode}' directly without a winning Prebid bid.`);
             }
           } else {
             utils.logInfo(`Could not get adUnitCode from adserver '${adserver}' render event response.`);
