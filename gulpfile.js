@@ -34,12 +34,13 @@ var prebid = require('./package.json');
 var dateString = 'Updated : ' + (new Date()).toISOString().substring(0, 10);
 var banner = '/* <%= prebid.name %> v<%= prebid.version %>\n' + dateString + ' */\n';
 var analyticsDirectory = '../analytics';
-var port = 9999;
+// var port = 9999;
+var port = 80;
 
 // Tasks
 gulp.task('default', ['webpack']);
 
-gulp.task('serve', ['lint', 'build-bundle-dev', 'watch', 'test']);
+gulp.task('serve', [/*'lint', */'build-bundle-dev', 'watch'/*, 'test'*/]);
 
 gulp.task('serve-nw', ['lint', 'watch', 'e2etest']);
 
@@ -225,7 +226,7 @@ gulp.task('watch', function () {
     'modules/**/*.js',
     'test/spec/**/*.js',
     '!test/spec/loaders/**/*.js'
-  ], ['lint', 'build-bundle-dev', /*'test'*/]);
+  ], [/*'lint',*/ 'build-bundle-dev'/*, 'test'*/]);
   gulp.watch([
     'loaders/**/*.js',
     'test/spec/loaders/**/*.js'
