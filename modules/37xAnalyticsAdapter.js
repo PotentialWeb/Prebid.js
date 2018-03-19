@@ -113,6 +113,10 @@ export default class ThirtySevenXAdapter {
         try {
           let adUnitCode = this.getAdUnitCodeFromAdserverResponse(...arguments);
           if (adUnitCode) {
+            if (!this.getAdUnit(adUnitCode)) {
+              utils.logInfo(`Adserver '${adserver}' rendered adUnit '${adUnitCode}' which was not configured via Prebid.js`);
+              return;
+            }
             let auctionEvent = this.getAuctionEventByAdUnitCode(adUnitCode);
             if (auctionEvent) {
               this.setAuctionEventStatus(auctionEvent, CONSTANTS.AUCTION_EVENT_STATUS.RENDERED);
@@ -352,6 +356,16 @@ export default class ThirtySevenXAdapter {
           }
           return true;
         }).length > 0;
+      },
+
+      /**
+       * @func getAdUnit
+       * @desc Gets adUnit from Prebid global registry
+       * @param { String } adUnitCode
+       */
+
+      getAdUnit(adUnitCode) {
+        return global.pbjs.adUnits.find(adUnit => adUnit.code === adUnitCode);
       },
 
       /**

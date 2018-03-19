@@ -14,6 +14,14 @@
   window.pbjs = window.pbjs || {};
   window.pbjs.que = window.pbjs.que || [];
 
+  /* Disable googletag initial load */
+
+  window.googletag = window.googletag || {};
+  window.googletag.cmd = window.googletag.cmd || [];
+  window.googletag.cmd.push(function() {
+    window.googletag.pubads().disableInitialLoad();
+  });
+
   /* Define adUnits */
 
   var adUnits = [{
@@ -525,23 +533,13 @@
     window.pbjs.requestBids({
       bidsBackHandler: sendAdserverRequest
     });
-  });
 
-  /* Enable 37x Analytics adapter */
+    /* Enable 37x Analytics adapter */
 
-  window.pbjs.que.push(function() {
     window.pbjs.enableAnalytics({
       provider: '37x',
       options: THIRTYSEVENXCONFIG
     });
-  });
-
-  /* Disable googletag initial load */
-
-  window.googletag = window.googletag || {};
-  window.googletag.cmd = window.googletag.cmd || [];
-  window.googletag.cmd.push(function() {
-    window.googletag.pubads().disableInitialLoad();
   });
 
   function sendAdserverRequest() {
