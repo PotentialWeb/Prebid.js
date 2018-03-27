@@ -55,6 +55,8 @@ describe('37xAnalyticsAdapter', () => {
         prebidRevenue: 0,
         adserverRevenueRatio: 0,
         impressions: 0,
+        prebidImpressions: 0,
+        adserverImpressionRatio: 0,
         pageviews: 1
       };
 
@@ -169,6 +171,11 @@ describe('37xAnalyticsAdapter', () => {
           cpm: 0.1, auctionId: '1', adUnitCode: '1'
         }, {
           cpm: 0.1, auctionId: '1', adUnitCode: '2'
+        }],
+        adUnits: [{
+          code: '1'
+        }, {
+          code: '2'
         }]
       });
 
@@ -227,6 +234,8 @@ describe('37xAnalyticsAdapter', () => {
           prebidRevenue: 0.0001,
           adserverRevenueRatio: 0.5,
           impressions: 2,
+          prebidImpressions: 1,
+          adserverImpressionRatio: 0.5,
           pageviews: 1
         };
 
@@ -308,7 +317,8 @@ function stubPbjs(opts = {}) {
   window.pbjs = {
     getHighestCpmBids() {
       return highestCpmBids;
-    }
+    },
+    adUnits: opts.adUnits ? opts.adUnits : undefined
   }
 }
 
@@ -327,7 +337,9 @@ function stubSession(config = {}) {
     revenue: 2,
     prebidRevenue: 1,
     adserverRevenueRatio: 0.5,
-    impressions: 1,
+    impressions: 2,
+    prebidImpressions: 1,
+    adserverImpressionRatio: 0.5,
     pageviews: 2,
     landingPath: '/test',
     currentPath: '/test',

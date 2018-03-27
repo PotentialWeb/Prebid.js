@@ -146,6 +146,7 @@ export default class ThirtySevenXAdapter {
             throw Error(`Could not find auctionEvent for adUnitCode '${adUnitCode}'. It should exist.`);
           }
           this.setAuctionEventStatus(auctionEvent, CONSTANTS.AUCTION_EVENT_STATUS.PREBID_RENDERED);
+          this.incrementSessionPrebidImpressions(this.session);
           this.creditSessionRevenue(this.session, auctionEvent.revenue, 'prebidRevenue');
           this.willSendData();
         } catch (err) {
@@ -192,6 +193,8 @@ export default class ThirtySevenXAdapter {
           prebidRevenue: 0,
           adserverRevenueRatio: 0,
           impressions: 0,
+          prebidImpressions: 0,
+          adserverImpressionRatio: 0,
           pageviews: 1,
           key: null
         };
@@ -292,6 +295,15 @@ export default class ThirtySevenXAdapter {
       },
 
       /**
+       * @func incrementSessionPrebidImpressions
+       * @desc Increments session prebid impressions value
+       */
+
+      incrementSessionPrebidImpressions(session) {
+        session.prebidImpressions += 1;
+      },
+
+      /**
        * @func incrementSessionPageviews
        * @desc If path doesn't match lastPath, increment pageview
        */
@@ -304,8 +316,26 @@ export default class ThirtySevenXAdapter {
       },
 
       /**
-       * @func calculateAdserverRevenueRatio
+       * @func calculateAdserverImpressionRatio
        * @desc Calculates adserver render ratio
+       */
+
+      calculateAdserverImpressionRatio(session) {
+        let { impressions, prebidImpressions } = session;
+
+        // 0/0 === NaN. Handle that edge case.
+        if (!utils.isNumber(impressions) ||
+            !utils.isNumber(prebidImpressions) ||
+            (impressions === 0 && prebidImpressions === 0)) {
+          return;
+        }
+
+        session.adserverImpressionRatio = 1 - (prebidImpressions / impressions);
+      },
+
+      /**
+       * @func calculateAdserverRevenueRatio
+       * @desc Calculates adserver revenue ratio
        */
 
       calculateAdserverRevenueRatio(session) {
@@ -446,6 +476,8 @@ export default class ThirtySevenXAdapter {
 
       sendData() {
         let session = this.session;
+        // Calculate the adserver impression ratio
+        this.calculateAdserverImpressionRatio(session);
         // Calculate the adserver revenue ratio
         this.calculateAdserverRevenueRatio(session);
         // Increment pageview
@@ -465,6 +497,7 @@ export default class ThirtySevenXAdapter {
         try {
           if (this.config.environment === 'test') {
             this.canSendData = true;
+            utils.logInfo(`37x Analytics Adapter session analytics successfully sent (in test mode).`, this.session);
             return;
           }
           ajax(url, res => this.afterRequest(res), JSON.stringify(session), { contentType: 'application/json' });
